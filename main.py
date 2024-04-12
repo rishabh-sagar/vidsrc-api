@@ -11,7 +11,14 @@ from io import BytesIO
 from fastapi.responses import StreamingResponse
 
 app = FastAPI()
-
+# Allow requests from any origin
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["GET", "POST", "PUT", "DELETE"],
+    allow_headers=["*"],
+)
 @app.get('/')
 async def index():
     return await info()
